@@ -198,6 +198,10 @@ Here we present some more technical documentation on advanced subjects for those
 Nuisance gas is a separate subject from the topics we covered above.
 Nonetheless, this type of gas is included on L2 transaction costs.
 
+::: tip More info on nuisance gas
+Check out our [protocol docs]() for more technical information on nuisance gas. 
+:::
+
 #### What is nuisance gas?
 
 Nuisance gas **provides an upper bound on the _maximum possible L1 gas_ that a [_fraud proof_](https://research.paradigm.xyz/optimism#fraud-proofs) can cost.**
