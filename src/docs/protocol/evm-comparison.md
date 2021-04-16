@@ -155,6 +155,10 @@ Calling the `ExecutionManager` takes up a bit of extra EVM gas, and is needed on
 ### Nuisance Gas
 There is a separate dimension of gas, called "nuisance gas", which is used to bound the net gas cost of fraud proofs.  In particular, witness data for the fraud proof's setup phase is not reflected in the L2 EVM gas cost.  Storage and contract creation `ovmOPCODES` have a separate cost in nuisance gas. If too much nuisance gas is spent in a call, the call's execution fails, like with EVM gas.
 
+::: tip More info on nuisance gas
+Check out our [protocol docs](https://github.com/ethereum-optimism/optimism/blob/feat/addSpecs/packages/specs/protocol/processes/execution.md#nuisance-gas) for more technical information on nuisance gas.
+:::
+
 ## State Trie
 
 The OVM state trie is similar to the EVM state trie, with a few small differences.

@@ -199,7 +199,7 @@ Nuisance gas is a separate subject from the topics we covered above.
 Nonetheless, this type of gas is included on L2 transaction costs.
 
 ::: tip More info on nuisance gas
-Check out our [protocol docs]() for more technical information on nuisance gas. 
+Check out our [protocol docs](https://github.com/ethereum-optimism/optimism/blob/feat/addSpecs/packages/specs/protocol/processes/execution.md#nuisance-gas) for more technical information on nuisance gas.
 :::
 
 #### What is nuisance gas?
