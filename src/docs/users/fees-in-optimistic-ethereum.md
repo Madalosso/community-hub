@@ -33,6 +33,7 @@ So, let's learn about gas in OE!
 
 Gas fees on L2 are charged in ETH (remember, [L2 ETH is not the same as ETH on L1](../protocol/evm-comparison.html#native-weth))
 
+<!-- UPDATE GAS DOCS TO EXPLAIN WHY GASPRICE IS 1 GWEI -->
 However, **the gas fee payment itself is equal to to your `gasLimit * gasPrice`**, a calculation that is slightly different from L1 where the fee you are charged is based on `gasUsed`.
 Due to this slight difference, **we recommend using `eth_estimateGas` to calculate your `gasLimit`.**
 This is because `gasPrice` is a constant value of `1 Gwei`, so your focus should be on optimizing the `gasLimit`.
