@@ -358,12 +358,19 @@ This is where the ETH (and token) bridges come in!
 
 #### The Standard™️ ETH Bridge
 
-Optimistic Ethereum comes with a standard ETH bridge, [`OVM_L1ETHGateway.sol`](https://github.com/ethereum-optimism/optimism/blob/master/packages/contracts/contracts/optimistic-ethereum/OVM/bridge/tokens/OVM_L1ETHGateway.sol). This smart contract acts as a _bridge_ between L1 and L2, letting users deposit ETH into the contract on L1 so that it can be used on L2.
+Optimistic Ethereum comes with a standard ETH bridge that is called  [`Proxy__OVM_L1ETHGateway.sol`]. It's contract address can be found in the [addresses.md](https://github.com/ethereum-optimism/optimism/blob/master/packages/contracts/addresses.md) file under our `contracts` package in our monorepo.
 
-`OVM_L1ETHGateway` has 2 important methods to keep in mind:
+This smart contract acts as a _bridge_ between L1 and L2, letting users deposit ETH into the contract on L1 so that it can be used on L2.
+
+::: warning Use the Proxy!
+It's important to remember you should use `Proxy__OVM_L1ETHGateway` and **NOT** `OVM_L1ETHGateway`.
+The `Proxy__OVM_L1ETHGateway` contract is the only contract allowed
+:::
+
+`Proxy__OVM_L1ETHGateway` has 2 important methods to keep in mind:
 
 1. [`deposit()`](https://github.com/ethereum-optimism/optimism/blob/master/packages/contracts/contracts/optimistic-ethereum/OVM/bridge/tokens/OVM_L1ETHGateway.sol#L81) is external and payable method used to send ETH from an account on L1 to the same address on L2.
-2. [`depositTo()`](https://github.com/ethereum-optimism/optimism/blob/master/packages/contracts/contracts/optimistic-ethereum/OVM/bridge/tokens/OVM_L1ETHGateway.sol#L93) is external and payable method used to send ETH to another address on L2.
+2. [`depositTo()`](https://github.com/ethereum-optimism/optimism/blob/master/packages/contracts/contracts/optimistic-ethereum/OVM/bridge/OVM_L1ETHGateway.sol#L93) is external and payable method used to send ETH to another address on L2.
 
 Here's an example deposit flow from L1 to L2 using the `depositTo()` method:
 
