@@ -125,15 +125,31 @@ Here's a step-by-step process on how to do that while in your browser:
 
 ![Custom RPC button](../../assets/custom-metamask-network-1.png)
 
-3. Next, you'll enter in the network parameters. Enter `Optimistic Ethereum (Local L2)` for the network name, `http://0.0.0.0:8545` for the RPC URL, and `420` for the chain ID -- additionally, you can also set the currency symbol to `ETH`, but that's not entirely necessary since the use of ETH is implicitly understood:
+3. Next, you'll enter in the network parameters:
+- network name: `Optimistic Ethereum (Local L2)` 
+- RPC URL: `http://0.0.0.0:8545`
+- chain ID: `420`
+
+Then click save.
 
 ![Entering network params](../../assets/custom-metamask-network-2.png)
 
-4. Click save! And, you're done! 🙌 😎. You'll then see something like the image below when you click on your new `Optimistic Ethereum (Local L2)` network!
+4. Next, we need to add the ETH address that is used on L2.
 
-![Saving custom network](../../assets/complete-custom-network.png)
+To do this, we need to add the WETH address address to our account.
 
-Adding the currency symbol is _optional_.
+![Adding WETH address](../../assets/add-weth-to-account.png)
+
+The WETH address to add is `0x4200000000000000000000000000000000000006`.
+You should see that the "Token Symbol" is `ETH` if you entered the address correctly.
+Despite this field reading `ETH`, it's important to understand that **this is actually an ERC20 version of ETH that we call WETH.**
+
+::: warning L2 WETH address  
+It's very important to note here that the default ETH address that is provided by MetaMask is **NOT** the same as the default WETH address that is used on L2.
+We will be use WETH to make transfers between one L2 address and another.
+Thus, here we add this specific address to make WETH transfers on L2.
+For more info, see [this section in the docs](../protocol/evm-comparison.html#native-weth).
+:::
 
 **L1 Custom Network (Optional)**
 
@@ -144,7 +160,6 @@ To do this, you would go through the same steps as above, but instead enter in t
 | Network Name                 |  `Optimistic Ethereum (Local L1)`  |
 | New RPC URL                  |      `http://0.0.0.0:9545`         |
 | Chain ID                     |        `31337`                     |
-| (_OPTIONAL_) Currency Symbol |        `ETH`                       |
 
 However, you'll likely mostly be using the L2 chain for most of your contract and deployment tests.
 So, we'd advise just adding the L2 custom network, unless you think you really need the local custom L1 chain network.
@@ -276,6 +291,13 @@ We provide a standard message-passing interface for sending data between L1 and 
 If you don't think you'll be sending information between layers, you probably don't need to read through this section.
 
 Documentation for arbitrary message passing is a Work In Progress™, but all features do already work.
+
+::: tip Bridges and messaging passing contracts are pre-deployed on Kovan testnet and Mainnet
+For the following bridge and message passing contracts described in the following sections, these contracts are pre-deployed on L2 Kovan testnet or L2 Mainnet.
+
+_That means that, unlike in your local instance of L2, you do **NOT** need to deploy your own bridge and message passing contracts to leverage either the bridge or the L1 <>  L2 communication functionality._
+:::
+
 In the meantime, you may be interested in taking a look at the Synthetix Bridge contracts.
 These contracts are pretty cool and make heavy use of our L1⇔L2 messaging infrastructure:
 
@@ -452,16 +474,4 @@ These contracts are:
 3. [`OVM_L1ERC20Gateway.sol`](https://github.com/ethereum-optimism/contracts/blob/master/contracts/optimistic-ethereum/OVM/bridge/tokens/OVM_L1ERC20Gateway.sol)
 4. [`OVM_L2DepositedERC20.sol`](https://github.com/ethereum-optimism/contracts/blob/master/contracts/optimistic-ethereum/OVM/bridge/tokens/OVM_L2DepositedERC20.sol)
 
-:::tip How-Tos WIP™️
-Guides for how to use these contracts are fast approaching! But they are still WIPs. In the meantime, check out this deposit-withdraw guide below 😉.
-
-As always, reach out to us on [discord](https://discord.gg/5TaAXGn2D8) with any questions, feedback, or issues you may have in these docs. We're here to help!
-:::
-
-Luckily for you, we made a simple example deposit-and-withdraw guide for how to use `Abs_L2DepositedToken.sol` on the [`deposit-withdraw`](https://github.com/ethereum-optimism/optimism-tutorial/tree/deposit-withdrawal) branch of the `optimism-tutorial` repo!
-The exciting L2 code 😋 you've been waiting for can be found in `contracts/MyL2DepositedERC20.sol` of that branch, and if you run through the `README.md` to deploy your ERC20 contract to your local Optimistic Ethereum L2, you'll be able to see the message-passing system at work in the logs while making an L1 to L2 ERC20 deposit, and back again, with an L2 to L1 ERC20 deposit.
-Those logs should look something like this, if you went through the steps correctly:
-
-![Deploy ERC20, L1 to L2 Deposit, and L2 to L1 Deposit](../../assets/deployERC20-L1toL2Deposit-and-L2toL1Deposit.png)
-
-Doesn't that look absolutely beautiful 😍😍😍!! From here, you're off to the races and ready for testing on Kovan! 🎉
+If you would like to see an example implementation of message passing in an application, we made a simple example deposit-and-withdraw guide for [how to use `Abs_L2DepositedToken.sol`](https://github.com/ethereum-optimism/l1-l2-deposit-withdrawal/blob/9529827a763dee21f28452bcd825ea2ce70f4b22/contracts/L2DepositedERC20.sol#L8-L11) on the [`l1-l2-deposit-withdrawal`](https://github.com/ethereum-optimism/l1-l2-deposit-withdrawal) example repository for you to check out!
